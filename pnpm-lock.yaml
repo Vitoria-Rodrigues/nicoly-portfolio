@@ -36,6 +36,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^6.1.2
         version: 6.3.0(vite@8.3.8(@types/node@24.19.2))
+      '@vitoria-rodrigues/agent-mesh':
+        specifier: github:vitoria-rodrigues/agent-mesh
+        version: https://codeload.github.com/vitoria-rodrigues/agent-mesh/tar.gz/05612cab5d6a69f1ec486ad419b8696f0a2a4a64
       eslint:
         specifier: ^10.14.0
         version: 10.15.0
@@ -443,6 +446,10 @@ packages:
         optional: true
       oxc-transform-react:
         optional: true
+
+  '@vitoria-rodrigues/agent-mesh@https://codeload.github.com/vitoria-rodrigues/agent-mesh/tar.gz/05612cab5d6a69f1ec486ad419b8696f0a2a4a64':
+    resolution: {gitHosted: true, integrity: sha512-4jcX+wmixvlJJI0NUOEN8utwttprrQXwWGyHE1ZkzdTKv9OaIlTalQKpmhnL6VUn44JQNSfbnJC78rMRZXQj+g==, tarball: https://codeload.github.com/vitoria-rodrigues/agent-mesh/tar.gz/05612cab5d6a69f1ec486ad419b8696f0a2a4a64}
+    version: 1.2.0
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -1394,6 +1401,8 @@ snapshots:
     dependencies:
       '@rolldown/pluginutils': 1.1.1
       vite: 8.3.8(@types/node@24.19.2)
+
+  '@vitoria-rodrigues/agent-mesh@https://codeload.github.com/vitoria-rodrigues/agent-mesh/tar.gz/05612cab5d6a69f1ec486ad419b8696f0a2a4a64': {}
 
   acorn-jsx@5.3.2(acorn@8.19.0):
     dependencies:
