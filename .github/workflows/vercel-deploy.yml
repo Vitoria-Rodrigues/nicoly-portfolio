@@ -16,57 +16,55 @@ on:
 
 jobs:
   validate:
-    name: Validação de Qualidade (CI)
+    name: Quality Validation (CI)
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout do código
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
-      - name: Setup Node.js com cache do pnpm
+      - name: Setup Node.js with pnpm cache
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
 
-      - name: Instalar Dependências
+      - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Checagem de Lint (ESLint)
+      - name: Run ESLint
         run: pnpm run lint
 
-      - name: Teste de Build Completo (TypeScript + Vite)
+      - name: Run full build (TypeScript + Vite)
         run: pnpm run build
 
   deploy:
-    name: Deploy em Produção (CD)
+    name: Production Deployment (CD)
     needs: validate
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout do código
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Instalar Vercel CLI
+      - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Baixar Configurações da Vercel
+      - name: Pull Vercel configuration
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
-      - name: Build de Produção
+      - name: Build production artifact
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
-      - name: Publicar na Vercel
+      - name: Deploy to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
